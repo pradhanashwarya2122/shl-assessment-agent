@@ -2,11 +2,10 @@
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, validator
-from typing import List, Optional
-import json
+from typing import List
 
 from agent.agent import SHLAgent
 
@@ -57,7 +56,7 @@ async def chat(messages: List[Message]):
     except Exception as e:
         print(f"Error: {e}")
         return ChatResponse(
-            reply="I encountered an issue. Could you rephrase your request?",
+            reply="I encountered an issue. Could you rephrase?",
             recommendations=[],
             end_of_conversation=False
         )

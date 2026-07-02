@@ -1,0 +1,268 @@
+{
+  "mean_recall": 0.124,
+  "details": {
+    "C1.md": {
+      "recall": 0.333,
+      "expected": [
+        "OPQ Universal Competency Report 2.0",
+        "Occupational Personality Questionnaire OPQ32r",
+        "OPQ Leadership Report"
+      ],
+      "got": [
+        "OPQ Leadership Report",
+        "Verify - Technical Checking - Next Generation",
+        "Enterprise Leadership Report 2.0",
+        "Verify - Inductive Reasoning (2014)",
+        "HiPo Assessment Report 2.0",
+        "HiPo Assessment Report 1.0",
+        "Enterprise Leadership Report 1.0",
+        "AI Skills",
+        "Entry Level Technical Support Solution",
+        "ReactJS (New)"
+      ],
+      "matched": [
+        "OPQ Leadership Report"
+      ],
+      "missing": [
+        "OPQ Universal Competency Report 2.0",
+        "Occupational Personality Questionnaire OPQ32r"
+      ]
+    },
+    "C10.md": {
+      "recall": 0.333,
+      "expected": [
+        "Graduate Scenarios",
+        "Occupational Personality Questionnaire OPQ32r",
+        "SHL Verify Interactive G+"
+      ],
+      "got": [
+        "Customer Service Phone Simulation",
+        "OPQ Emotional Intelligence Report",
+        "Verify - Technical Checking - Next Generation",
+        "Customer Service Phone Solution",
+        "Occupational Personality Questionnaire OPQ32r",
+        "Sales & Service Phone Simulation",
+        "Verify - Numerical Ability",
+        "Verify - Verbal Ability - Next Generation",
+        "OPQ Universal Competency Report 2.0",
+        "Load Runner (New)"
+      ],
+      "matched": [
+        "Occupational Personality Questionnaire OPQ32r"
+      ],
+      "missing": [
+        "Graduate Scenarios",
+        "SHL Verify Interactive G+"
+      ]
+    },
+    "C2.md": {
+      "recall": 0.2,
+      "expected": [
+        "SHL Verify Interactive G+",
+        "Networking and Implementation (New)",
+        "Occupational Personality Questionnaire OPQ32r",
+        "Linux Programming (General)",
+        "Smart Interview Live Coding"
+      ],
+      "got": [
+        "Verify - Technical Checking - Next Generation",
+        "SHL Verify Interactive G+",
+        "Verify - Inductive Reasoning (2014)",
+        "Verify Interactive Process Monitoring",
+        "HiPo Assessment Report 2.0",
+        "SHL Verify Interactive \u2013 Numerical Reasoning",
+        "HiPo Assessment Report 1.0",
+        "Verify - G+",
+        "Verify - Numerical Ability",
+        "Verify - Verbal Ability - Next Generation"
+      ],
+      "matched": [
+        "SHL Verify Interactive G+"
+      ],
+      "missing": [
+        "Linux Programming (General)",
+        "Smart Interview Live Coding",
+        "Occupational Personality Questionnaire OPQ32r",
+        "Networking and Implementation (New)"
+      ]
+    },
+    "C3.md": {
+      "recall": 0.0,
+      "expected": [
+        "Customer Service Phone Simulation",
+        "Contact Center Call Simulation (New)",
+        "SVAR Spoken English (US) (New)",
+        "Entry Level Customer Serv - Retail & Contact Center"
+      ],
+      "got": [],
+      "matched": [],
+      "missing": [
+        "Customer Service Phone Simulation",
+        "Contact Center Call Simulation (New)",
+        "SVAR Spoken English (US) (New)",
+        "Entry Level Customer Serv - Retail & Contact Center"
+      ]
+    },
+    "C4.md": {
+      "recall": 0.0,
+      "expected": [
+        "Graduate Scenarios",
+        "Financial Accounting (New)",
+        "SHL Verify Interactive \u2013 Numerical Reasoning",
+        "Occupational Personality Questionnaire OPQ32r",
+        "Basic Statistics (New)"
+      ],
+      "got": [
+        "SAP Business Objects WebI (New)",
+        "Verify - Technical Checking - Next Generation",
+        "SHL Verify Interactive G+",
+        "Financial and Banking Services (New)",
+        "Verify - G+",
+        "Verify - Numerical Ability",
+        "Verify - Verbal Ability - Next Generation",
+        "Desktop Support (New)",
+        "ReactJS (New)",
+        "Culinary Skills (New)"
+      ],
+      "matched": [],
+      "missing": [
+        "Graduate Scenarios",
+        "Financial Accounting (New)",
+        "Occupational Personality Questionnaire OPQ32r",
+        "SHL Verify Interactive \u2013 Numerical Reasoning",
+        "Basic Statistics (New)"
+      ]
+    },
+    "C5.md": {
+      "recall": 0.0,
+      "expected": [
+        "Global Skills Development Report",
+        "Occupational Personality Questionnaire OPQ32r",
+        "OPQ MQ Sales Report",
+        "Global Skills Assessment",
+        "Sales Transformation 2.0 - Individual Contributor"
+      ],
+      "got": [
+        "Spring (New)",
+        "Verify - Technical Checking - Next Generation",
+        "JavaScript (New)",
+        "Prism (New)",
+        "RESTful Web Services (New)",
+        "HTML5 (New)",
+        "Desktop Support (New)",
+        "Drupal (New)",
+        "Entry Level Technical Support Solution",
+        "ReactJS (New)"
+      ],
+      "matched": [],
+      "missing": [
+        "Global Skills Development Report",
+        "Occupational Personality Questionnaire OPQ32r",
+        "OPQ MQ Sales Report",
+        "Global Skills Assessment",
+        "Sales Transformation 2.0 - Individual Contributor"
+      ]
+    },
+    "C6.md": {
+      "recall": 0.0,
+      "expected": [
+        "Workplace Health and Safety (New)",
+        "Manufac. & Indust. - Safety & Dependability 8.0",
+        "Dependability and Safety Instrument (DSI)"
+      ],
+      "got": [],
+      "matched": [],
+      "missing": [
+        "Workplace Health and Safety (New)",
+        "Manufac. & Indust. - Safety & Dependability 8.0",
+        "Dependability and Safety Instrument (DSI)"
+      ]
+    },
+    "C7.md": {
+      "recall": 0.0,
+      "expected": [
+        "Medical Terminology (New)",
+        "HIPAA (Security)",
+        "Occupational Personality Questionnaire OPQ32r",
+        "Dependability and Safety Instrument (DSI)",
+        "Microsoft Word 365 - Essentials (New)"
+      ],
+      "got": [],
+      "matched": [],
+      "missing": [
+        "Dependability and Safety Instrument (DSI)",
+        "Microsoft Word 365 - Essentials (New)",
+        "Medical Terminology (New)",
+        "HIPAA (Security)",
+        "Occupational Personality Questionnaire OPQ32r"
+      ]
+    },
+    "C8.md": {
+      "recall": 0.0,
+      "expected": [
+        "MS Word (New)",
+        "Microsoft Excel 365 (New)",
+        "Occupational Personality Questionnaire OPQ32r",
+        "MS Excel (New)",
+        "Microsoft Word 365 (New)"
+      ],
+      "got": [
+        "SAP Business Objects WebI (New)",
+        "Mechatronics Engineering (New)",
+        "Verify - Technical Checking - Next Generation",
+        "Automation Anywhere RPA Development (New)",
+        "Software Business Analysis",
+        "Micro Focus Unified Functional Testing (New)",
+        "Desktop Support (New)",
+        "AI Skills",
+        "Entry Level Technical Support Solution",
+        "ReactJS (New)"
+      ],
+      "matched": [],
+      "missing": [
+        "MS Word (New)",
+        "Microsoft Excel 365 (New)",
+        "Occupational Personality Questionnaire OPQ32r",
+        "MS Excel (New)",
+        "Microsoft Word 365 (New)"
+      ]
+    },
+    "C9.md": {
+      "recall": 0.375,
+      "expected": [
+        "Spring (New)",
+        "SHL Verify Interactive G+",
+        "Docker (New)",
+        "RESTful Web Services (New)",
+        "Occupational Personality Questionnaire OPQ32r",
+        "Amazon Web Services (AWS) Development (New)",
+        "Core Java (Advanced Level) (New)",
+        "SQL (New)"
+      ],
+      "got": [
+        "Enterprise Java Beans (New)",
+        "Java Web Services (New)",
+        "Cloud Computing (New)",
+        "Java Platform Enterprise Edition 7 (Java EE 7)",
+        "Amazon Web Services (AWS) Development (New)",
+        "Java 8 (New)",
+        "Java 2 Platform Enterprise Edition 1.4 Fundamental",
+        "Core Java (Advanced Level) (New)",
+        "Java Frameworks (New)",
+        "SQL (New)"
+      ],
+      "matched": [
+        "Core Java (Advanced Level) (New)",
+        "Amazon Web Services (AWS) Development (New)",
+        "SQL (New)"
+      ],
+      "missing": [
+        "Spring (New)",
+        "SHL Verify Interactive G+",
+        "Docker (New)",
+        "RESTful Web Services (New)",
+        "Occupational Personality Questionnaire OPQ32r"
+      ]
+    }
+  }
+}

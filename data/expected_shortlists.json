@@ -1,0 +1,68 @@
+{
+  "C1.md": [
+    "Occupational Personality Questionnaire OPQ32r",
+    "OPQ Universal Competency Report 2.0",
+    "OPQ Leadership Report"
+  ],
+  "C10.md": [
+    "SHL Verify Interactive G+",
+    "Occupational Personality Questionnaire OPQ32r",
+    "Graduate Scenarios"
+  ],
+  "C2.md": [
+    "Smart Interview Live Coding",
+    "Linux Programming (General)",
+    "Networking and Implementation (New)",
+    "SHL Verify Interactive G+",
+    "Occupational Personality Questionnaire OPQ32r"
+  ],
+  "C3.md": [
+    "SVAR Spoken English (US) (New)",
+    "Contact Center Call Simulation (New)",
+    "Entry Level Customer Serv - Retail & Contact Center",
+    "Customer Service Phone Simulation"
+  ],
+  "C4.md": [
+    "SHL Verify Interactive \u2013 Numerical Reasoning",
+    "Financial Accounting (New)",
+    "Basic Statistics (New)",
+    "Occupational Personality Questionnaire OPQ32r",
+    "Graduate Scenarios"
+  ],
+  "C5.md": [
+    "Global Skills Assessment",
+    "Global Skills Development Report",
+    "Occupational Personality Questionnaire OPQ32r",
+    "OPQ MQ Sales Report",
+    "Sales Transformation 2.0 - Individual Contributor"
+  ],
+  "C6.md": [
+    "Dependability and Safety Instrument (DSI)",
+    "Manufac. & Indust. - Safety & Dependability 8.0",
+    "Workplace Health and Safety (New)"
+  ],
+  "C7.md": [
+    "HIPAA (Security)",
+    "Medical Terminology (New)",
+    "Microsoft Word 365 - Essentials (New)",
+    "Dependability and Safety Instrument (DSI)",
+    "Occupational Personality Questionnaire OPQ32r"
+  ],
+  "C8.md": [
+    "MS Excel (New)",
+    "MS Word (New)",
+    "Occupational Personality Questionnaire OPQ32r",
+    "Microsoft Excel 365 (New)",
+    "Microsoft Word 365 (New)"
+  ],
+  "C9.md": [
+    "Core Java (Advanced Level) (New)",
+    "Spring (New)",
+    "RESTful Web Services (New)",
+    "SQL (New)",
+    "SHL Verify Interactive G+",
+    "Occupational Personality Questionnaire OPQ32r",
+    "Amazon Web Services (AWS) Development (New)",
+    "Docker (New)"
+  ]
+}

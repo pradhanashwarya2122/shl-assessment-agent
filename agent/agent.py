@@ -4,8 +4,6 @@ from rank_bm25 import BM25Okapi
 from sklearn.preprocessing import MinMaxScaler
 
 
-# Expanded job-title suffix list used in BOTH user-turn and
-# assistant-turn role extraction. Keep in sync across both regexes.
 _TITLE_SUFFIXES = (
     'developer|engineer|architect|analyst|manager|tester|designer|lead|programmer|'
     'agent|operator|assistant|staff|representative|nurse|technician|coordinator|'
@@ -159,7 +157,7 @@ class SHLAgent:
             return self._respond(question, [], False)
 
     # ==================================================================
-    # FACT EXTRACTION
+    # FACT EXTRACTION (EXPANDED)
     # ==================================================================
     def _extract_facts(self, messages):
         all_text = ' '.join(
@@ -171,7 +169,6 @@ class SHLAgent:
             'seniority': None, 'remote': False, 'years': None,
         }
 
-        # ── Primary role extraction via regex (expanded title list) ──
         role_patterns = [
             rf'hiring\s+(?:a|an)?\s*([^.!?]{{3,60}}?(?:{_TITLE_SUFFIXES}))',
             rf'(?:need|seeking|looking for|for)\s+(?:a|an)?\s*([^.!?]{{3,60}}?(?:{_TITLE_SUFFIXES}))',
@@ -189,7 +186,6 @@ class SHLAgent:
                 facts['role'] = role_text.strip()
                 break
 
-        # ── Tech-language → role fallback ──
         if not facts['role']:
             skill_roles = {
                 'java': 'Java Developer', 'python': 'Python Developer',
@@ -201,41 +197,52 @@ class SHLAgent:
                     facts['role'] = role_name
                     break
 
-        # ── Domain keyword → role fallback (catches C3, C6, C8, C7 etc.) ──
-        # Ordered most-specific first so earlier entries win.
         if not facts['role']:
             domain_role_map = [
-                (r'contact cent(?:re|er)|call cent(?:re|er)|inbound call',  'contact centre agent'),
-                (r'customer service',                                         'customer service agent'),
-                (r'plant operator|chemical facility|process operator',        'plant operator'),
-                (r'admin(?:istrative)?\s+assistant|clerical',                'admin assistant'),
-                (r'health(?:care)?|medical|clinical|hospital|nurse|hipaa',   'healthcare staff'),
-                (r'sales\b|account\s+executive|business development',        'sales representative'),
-                (r'warehouse|logistics|supply chain|forklift',               'warehouse operative'),
-                (r'graduate|campus|fresher|trainee',                         'graduate'),
+                (r'contact cent(?:re|er)|call cent(?:re|er)|inbound call', 'contact centre agent'),
+                (r'customer service', 'customer service agent'),
+                (r'plant operator|chemical facility|process operator|manufacturing', 'plant operator'),
+                (r'admin(?:istrative)?\s+assistant|clerical|office admin', 'admin assistant'),
+                (r'health(?:care)?|medical|clinical|hospital|nurse|hipaa|patient', 'healthcare staff'),
+                (r'sales\b|account\s+executive|business development', 'sales representative'),
+                (r'warehouse|logistics|supply chain|forklift', 'warehouse operative'),
+                (r'graduate|campus|fresher|trainee|entry.level|recent grad', 'graduate'),
+                (r'financial|finance|accounting|banking|audit', 'financial analyst'),
+                (r'rust\s+(?:developer|engineer|programmer)', 'Rust developer'),
+                (r'full.stack|fullstack', 'full stack developer'),
+                (r'frontend|front.end|ui\s+developer', 'frontend developer'),
+                (r'backend|back.end|api\s+developer', 'backend developer'),
+                (r'data\s+(?:scientist|analyst|engineer)', 'data professional'),
+                (r'project\s+manager|programme\s+manager|scrum\s+master', 'project manager'),
+                (r'security|cyber|infosec|penetration', 'security professional'),
+                (r'operator|technician|mechanic|electrician', 'technical operator'),
             ]
             for pattern, role_name in domain_role_map:
                 if re.search(pattern, all_text):
                     facts['role'] = role_name
                     break
 
-        # ── Skills ──
         skill_words = [
-            # Tech languages / frameworks
             'java', 'python', 'javascript', 'typescript', 'react', 'angular', 'vue', 'node',
             'sql', 'aws', 'azure', 'gcp', 'docker', 'kubernetes', 'microservices', 'api',
             'rest', 'graphql', 'agile', 'scrum', 'cloud', 'devops', 'machine learning',
             'ai', 'data', 'spring', 'hibernate', 'git', 'spring boot',
-            # Leadership / behavioural
             'stakeholder', 'communication', 'leadership',
-            # Office software (were absent — breaks C8)
             'excel', 'word', 'powerpoint', 'outlook', 'ms office', 'microsoft office',
-            # Domain signals (improve BM25 when role is vague)
-            'safety', 'customer service', 'contact centre', 'contact center',
+            'safety', 'dependability', 'customer service', 'call center', 'contact center',
+            'finance', 'accounting', 'banking', 'numerical', 'statistics',
+            'healthcare', 'medical', 'hipaa', 'clinical', 'patient',
+            'sales', 'retail', 'selling', 'account management',
+            'rust', 'c++', 'c#', 'golang', 'php', 'ruby', 'swift', 'kotlin',
+            'networking', 'linux', 'unix', 'windows', 'infrastructure',
+            'full stack', 'frontend', 'backend', 'mobile', 'web',
+            'bilingual', 'spanish', 'french', 'german', 'language',
+            'writing', 'reading', 'listening', 'speaking', 'comprehension',
+            'problem solving', 'critical thinking', 'analytical',
+            'project management', 'time management', 'organization',
         ]
         facts['skills'] = list(set(s for s in skill_words if s in all_text))
 
-        # ── Test-type signals ──
         if any(w in all_text for w in ['personality', 'behavioral', 'behaviour',
                                         'soft skill', 'behavior', 'behavioural']):
             facts['test_types'].append('P')
@@ -248,7 +255,6 @@ class SHLAgent:
         if any(w in all_text for w in ['situational', 'judgment', 'sjt', 'scenario']):
             facts['test_types'].append('S')
 
-        # ── Seniority ──
         if any(w in all_text for w in ['senior', 'lead', 'principal', 'architect', 'head', 'cxo',
                                         'director', 'vp', '15+', '10+', '15 years', '10 years',
                                         '8 years']):
@@ -265,10 +271,6 @@ class SHLAgent:
             facts['years'] = int(exp_match.group(1))
         facts['remote'] = 'remote' in all_text
 
-        # ── Recover context from prior assistant messages ──
-        # Fixes stale-fact problem when a follow-up user turn (e.g. comparison
-        # question) carries no role/type context of its own.
-        # Uses the same expanded _TITLE_SUFFIXES so non-tech roles are found.
         assistant_text = ' '.join(
             [m.get('content', '') for m in messages if m.get('role') == 'assistant']
         ).lower()
@@ -292,7 +294,7 @@ class SHLAgent:
         return facts
 
     # ==================================================================
-    # QUERY & SEARCH
+    # QUERY & SEARCH (WITH NAME MATCHING BOOST)
     # ==================================================================
     def _build_query(self, facts, type_hint=None):
         parts = []
@@ -304,8 +306,6 @@ class SHLAgent:
         if facts.get('seniority'):
             parts.append(facts['seniority'])
 
-        # Synonym expansion — each key is a substring of a possible role value.
-        # All contact-centre variants map to the same expanded query terms.
         role_synonyms = {
             'contact centre agent':  'call center customer service phone inbound entry level',
             'contact centre':        'call center customer service phone inbound',
@@ -319,13 +319,22 @@ class SHLAgent:
             'graduate':              'entry level campus fresh graduate trainee',
             'sales representative':  'selling account business development opq mq',
             'sales':                 'selling retail account business development',
+            'financial analyst':     'finance accounting banking numerical statistics',
+            'rust developer':        'rust systems programming linux infrastructure',
+            'full stack developer':  'full stack web frontend backend javascript',
+            'frontend developer':    'frontend ui react angular javascript web',
+            'backend developer':     'backend api server database sql microservices',
+            'data professional':     'data science analytics machine learning sql statistics',
+            'project manager':       'project management agile scrum leadership stakeholder',
+            'security professional': 'security cybersecurity infosec network protection',
+            'technical operator':    'operator technician maintenance repair industrial',
         }
         if facts.get('role'):
             role_lower = facts['role'].lower()
             for key, synonyms in role_synonyms.items():
                 if key in role_lower:
                     parts.append(synonyms)
-                    break   # first (most-specific) match wins
+                    break
 
         type_map = {
             'P': 'personality behavioral',
@@ -358,14 +367,19 @@ class SHLAgent:
         emb_norm = scaler.fit_transform(emb_scores.reshape(-1, 1)).flatten()
         combined = 0.5 * bm25_norm + 0.5 * emb_norm
 
-        # Boost assessments whose curated keys directly overlap with query tokens.
         query_tokens = set(tok_query)
         for idx, item in enumerate(self.catalog):
             item_keys = ' '.join(item.get('keys', [])).lower()
             key_tokens = set(item_keys.split())
-            exact_matches = query_tokens & key_tokens
-            if exact_matches:
-                combined[idx] += 0.1 * len(exact_matches)
+            exact_key_matches = query_tokens & key_tokens
+
+            name_tokens = set(item['name'].lower().split())
+            exact_name_matches = query_tokens & name_tokens
+
+            if exact_key_matches:
+                combined[idx] += 0.15 * len(exact_key_matches)
+            if exact_name_matches:
+                combined[idx] += 0.1 * len(exact_name_matches)
 
         scored = []
         for idx, item in enumerate(self.catalog):
